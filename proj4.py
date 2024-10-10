@@ -31,7 +31,7 @@ for json_file in json_files:
 # reading and parsing xml files and combining with single dataframe
 xml_files=glob.glob("/Users/Sangeetha/Desktop/source/*.xml")
 
-books_list = []
+list1 = []
 
 #parsing the xml file using parse() function in elementtree module
 for xml_file in xml_files:
@@ -40,13 +40,13 @@ for xml_file in xml_files:
     tree = ET.parse(xml_file)
     root = tree.getroot()
 #need to extract the data from the XML file by iterating over the XML tree, accessing the tags and text of each element
-    for book_elem in root.findall('.//person'):
-        book_dict = {}
-        for child_elem in book_elem:
-            book_dict[child_elem.tag] = child_elem.text
-        books_list.append(book_dict)
+    for elem in root.findall('.//person'):
+        dict = {}
+        for i in elem:
+            dict[i.tag] = i.text
+        list1.append(dict)
 
-temp2_df=pd.DataFrame(books_list)
+temp2_df=pd.DataFrame(list1)
 df = pd.concat([df,temp2_df])
 
 with open("my_log.txt", "a") as log_file:
